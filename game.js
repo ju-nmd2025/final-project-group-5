@@ -1,4 +1,4 @@
-import Character from "./character";
+import { Character } from "./character";
 function setup() {
   createCanvas(400, 490);
 }
