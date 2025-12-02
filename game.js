@@ -2,8 +2,11 @@ import { Character } from "./character";
 import { Platform } from "./platform";
 
 function setup() {
-  createCanvas(400, 490);
+  createCanvas(canvasWidth, canvasHeight);
 }
+let canvasWidth = 500;
+let canvasHeight = 490;
+let floor = 400;
 let character = new Character(50, 50, 50, 50);
 let platforms = [
   new Platform(270, 200, 80, 20),
@@ -11,15 +14,47 @@ let platforms = [
   new Platform(100, 150, 80, 20),
 ];
 
+function drawFloor() {
+  push();
+  strokeWeight(2);
+  line(0, floor, canvasWidth, floor);
+  pop();
+}
+
 function draw() {
   background(125, 207, 182);
+
   character.draw();
+
   for (const platform of platforms) {
     platform.draw();
-    platform.y -= 3;
+    platform.y -= 2;
 
     if (platform.y + platform.h < 0) {
       platform.y = 490;
     }
+
+    if (characterFall(character, platforms)) {
+      character.y += 10;
+    }
+  }
+
+  function characterFall(character, platforms) {
+    for (const platform of platforms) {
+      if (character.isStanding(character, platform)) {
+        return false;
+      }
+    }
+    if (character.y + character.h < 400) {
+      return true;
+    }
+
+    return false;
+  }
+  drawFloor();
+}
+function keyPressed() {
+  if (!characterFall(character, platforms)) {
+    character.y -= 120;
   }
 }
