@@ -8,3 +8,5 @@ function draw() {
   background(125, 207, 182);
   character.draw();
 }
+
+import { platform} from "./platform"; 
