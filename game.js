@@ -1,6 +1,5 @@
 import { Character } from "./character";
 import { Platform } from "./platform";
-import { Platform } from "./spike";
 
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
@@ -26,12 +25,7 @@ function drawFloor() {
 }
 
 function draw() {
-<<<<<<< Updated upstream
-  background(125, 207, 182);
-
-=======
   background(216, 189, 170);
->>>>>>> Stashed changes
   character.draw();
 
   for (const platform of platforms) {
