@@ -1,5 +1,6 @@
 import { Character } from "./character";
 import { Platform } from "./platform";
+import { screenMove } from "./gameHandler";
 
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
@@ -26,6 +27,8 @@ function drawFloor() {
 
 function draw() {
   background(216, 189, 170);
+  drawFloor();
+
   character.draw();
   character.fall();
   if (character.y + character.h >= floor) {
@@ -33,6 +36,7 @@ function draw() {
     character.velocity = 0; //velocity of falling is reduced
     character.y = 350; //character.y position comes to a stop
   }
+  screenMove();
   character.jump();
   if (character.x + character.w < 0) {
     character.x = 440;
@@ -40,6 +44,7 @@ function draw() {
   if (character.x + character.w > 490) {
     character.x = 5;
   }
-
-  drawFloor();
+  for (const platform of platforms) {
+    platform.draw();
+  }
 }
