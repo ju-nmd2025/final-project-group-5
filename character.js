@@ -4,6 +4,9 @@ export default class Character {
     this.y = y;
     this.w = w;
     this.h = h;
+    this.velocity = 0;
+    this.gravity = 0.2;
+    this.jumpForce = 2;
   }
 
   draw() {
@@ -13,15 +16,9 @@ export default class Character {
     rect(this.x, this.y, this.w, this.h);
     pop();
   }
-  isStanding(character, platform) {
-    if (
-      platform.y === character.y + character.h &&
-      platform.x <= character.x + character.w &&
-      platform.x + platform.w > character.x
-    ) {
-      return true;
-    } else {
-      return false;
-    }
+
+  fall() {
+    this.velocity = this.velocity + this.gravity; //velocity = 0 - stagnant at first and then starts to fall and with each frame the fall is faster
+    this.y = this.y + this.velocity; //as the velocity increases, the positioning should increase so that the character moves downwards (more positive)
   }
 }
