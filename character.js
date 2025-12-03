@@ -16,10 +16,26 @@ export default class Character {
     rect(this.x, this.y, this.w, this.h);
     pop();
   }
+  isStanding(platform) {
+    if (
+      Math.abs(this.y + this.h - platform.y) < this.jumpForce &&
+      this.x + this.w >= platform.x &&
+      this.x <= platform.x + platform.w
+    ) {
+      return true;
+    }
+    return false;
+  }
 
-  fall() {
-    this.velocity = this.velocity + this.gravity; //velocity = 0 - stagnant at first and then starts to fall and with each frame the fall is faster
-    this.y = this.y + this.velocity; //as the velocity increases, the positioning should increase so that the character moves downwards (more positive)
+  fall(platforms) {
+    for (const platform of platforms) {
+      if (this.isStanding(platform)) {
+        return false;
+      } else {
+        this.velocity = this.velocity + this.gravity; //velocity = 0 - stagnant at first and then starts to fall and with each frame the fall is faster
+        this.y = this.y + this.velocity; //as the velocity increases, the positioning should increase so that the character moves downwards (more positive)
+      }
+    }
   }
 
   jump() {

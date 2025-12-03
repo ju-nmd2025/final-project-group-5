@@ -1,6 +1,7 @@
 import { Character } from "./character";
 import { Platform } from "./platform";
 import { screenMove } from "./gameHandler";
+import { checkCollision } from "./gameHandler";
 
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
@@ -26,17 +27,20 @@ function drawFloor() {
 }
 
 function draw() {
+  screenMove();
   background(216, 189, 170);
   drawFloor();
 
   character.draw();
-  character.fall();
+  character.fall(platforms);
+  checkCollision(character, floor, platforms);
+
   if (character.y + character.h >= floor) {
     //prevents the character from falling underground
     character.velocity = 0; //velocity of falling is reduced
     character.y = 350; //character.y position comes to a stop
   }
-  screenMove();
+
   character.jump();
   if (character.x + character.w < 0) {
     character.x = 440;
