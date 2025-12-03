@@ -27,36 +27,12 @@ function drawFloor() {
 function draw() {
   background(216, 189, 170);
   character.draw();
-
-  for (const platform of platforms) {
-    platform.draw();
-    platform.y -= 2;
-
-    if (platform.y + platform.h < 0) {
-      platform.y = 490;
-    }
-
-    if (characterFall(character, platforms)) {
-      character.y += 10;
-    }
+  character.fall();
+  if (character.y + character.h >= floor) {
+    //prevents the character from falling underground
+    character.velocity = 0; //velocity of falling is reduced
+    character.y = 350; //character.y position comes to a stop
   }
 
-  function characterFall(character, platforms) {
-    for (const platform of platforms) {
-      if (character.isStanding(character, platform)) {
-        return false;
-      }
-    }
-    if (character.y + character.h < 400) {
-      return true;
-    }
-
-    return false;
-  }
   drawFloor();
-}
-function keyPressed() {
-  if (!characterFall(character, platforms)) {
-    character.y -= 120;
-  }
 }
