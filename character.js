@@ -30,12 +30,13 @@ export default class Character {
           this.y + this.h <= platform.y &&
           this.y + this.h + this.velocity >= platform.y
         ) {
-          this.y = this.y; // stop it from falling
+          this.y = platform.y - this.h; // stop it from falling
           this.velocity = 0; //velocity is zero since we r not falling
           this.onGround = true;
           return;
         }
       }
+      this.onGround = false;
     }
   }
 
