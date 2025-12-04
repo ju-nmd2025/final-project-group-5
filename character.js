@@ -7,6 +7,7 @@ export default class Character {
     this.velocity = 0;
     this.gravity = 0.5;
     this.jumpForce = 2;
+    this.onTheGround = false;
   }
 
   draw() {
@@ -17,9 +18,44 @@ export default class Character {
     pop();
   }
 
+  collision(platform) {
+    // Only check if falling
+    for (const platform of platforms) {
+      if (this.velocity >= 0) {
+        //when character is not moving upwards (can be falling or just stadanding)
+        // Character edges
+        let feet = this.y + this.h;
+        let nextFeet = feet + this.velocity;
+
+        // Platform edges (TOP-LEFT ORIGIN!)
+        let pTop = platform.y;
+        let pLeft = platform.x;
+        let pRight = platform.x + platform.w;
+
+        // horizontal overlap
+        let withinX = this.x + this.w > pLeft && this.x < pRight;
+
+        // vertical collision with platform top
+        let hittingTop = feet <= pTop && nextFeet >= pTop;
+
+        if (withinX && hittingTop) {
+          this.y = pTop - this.h; // place on platform
+          this.velocity = 0;
+          this.onGround = true;
+          return;
+        }
+      }
+    }
+
+    // no collision this frame
+    this.onGround = false;
+  }
+
   fall() {
-    this.velocity = this.velocity + this.gravity; //velocity = 0 - stagnant at first and then starts to fall and with each frame the fall is faster
-    this.y = this.y + this.velocity; //as the velocity increases, the positioning should increase so that the character moves downwards (more positive)
+    if (!this.onGround) {
+      this.velocity += this.gravity; // //velocity = 0 - stagnant at first and then starts to fall and with each frame the fall is faster
+      this.y += this.velocity; //as the velocity increases, the positioning should increase so that the character moves downwards (more positive)
+    }
   }
 
   jump() {
