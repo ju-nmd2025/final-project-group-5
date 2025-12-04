@@ -7,7 +7,7 @@ function setup() {
 }
 let canvasWidth = 500;
 let canvasHeight = 490;
-let floor = 400;
+let floor = canvasHeight;
 let character = new Character(50, 50, 50, 50);
 let platforms = [
   new Platform(270, 200, 80, 20),
@@ -29,13 +29,17 @@ function draw() {
   screenMove();
   background(216, 189, 170);
   drawFloor();
-
+  for (const platform of platforms) {
+    platform.draw();
+    character.collision(platform);
+  }
   character.draw();
+
   character.fall();
   if (character.y + character.h >= floor) {
     //prevents the character from falling underground
     character.velocity = 0; //velocity of falling is reduced
-    character.y = 350; //character.y position comes to a stop
+    character.y = canvasHeight - character.h; //character.y position comes to a stop
   }
 
   character.jump();
@@ -44,8 +48,5 @@ function draw() {
   } //these if statements makes sure that u dont move the character off screen
   if (character.x + character.w > 490) {
     character.x = 5;
-  }
-  for (const platform of platforms) {
-    platform.draw();
   }
 }

@@ -17,9 +17,22 @@ export default class Character {
     pop();
   }
 
+  collision(platform) {
+    if (
+      this.x >= platform.x - platform.w / 2 &&
+      this.x <= platform.x + platform.w / 2 &&
+      this.y >= platform.y - platform.h / 2 &&
+      this.y < platform.y + platform.h / 2
+    ) {
+      this.y = this.y; //dont fall
+      this.velocity = 0; //velocity is zero since we r not falling
+      this.jump(); // allows to jump again?
+    }
+  }
+
   fall() {
-    this.velocity = this.velocity + this.gravity; //velocity = 0 - stagnant at first and then starts to fall and with each frame the fall is faster
-    this.y = this.y + this.velocity; //as the velocity increases, the positioning should increase so that the character moves downwards (more positive)
+    this.velocity = this.velocity + this.gravity;
+    this.y = this.y + this.velocity;
   }
 
   jump() {
