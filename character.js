@@ -19,35 +19,24 @@ export default class Character {
   }
 
   collision(platform) {
-    // Only check if falling
     for (const platform of platforms) {
-      if (this.velocity >= 0) { //when character is not moving upwards (can be falling or just stadanding)
-        // Character edges
-        let feet = this.y + this.h;
-        let nextFeet = feet + this.velocity;
+      if (this.velocity >= 0) {
+        //when character is not moving upwards (can be falling or just stadanding)
 
-        // Platform edges (TOP-LEFT ORIGIN!)
-        let pTop = platform.y;
-        let pLeft = platform.x;
-        let pRight = platform.x + platform.w;
-
-        // horizontal overlap
-        let withinX = this.x + this.w > pLeft && this.x < pRight;
-
-        // vertical collision with platform top
-        let hittingTop = feet <= pTop && nextFeet >= pTop;
-
-        if (withinX && hittingTop) {
-          this.y = pTop - this.h; // place on platform
-          this.velocity = 0;
+        if (
+          //conditions to check if the character is within the range of being on the platform or atleast overlapping it
+          this.x + this.w > platform.x &&
+          this.x < platform.x + platform.w &&
+          this.y + this.h <= platform.y &&
+          this.y + this.h + this.velocity >= platform.y
+        ) {
+          this.y = this.y; // stop it from falling
+          this.velocity = 0; //velocity is zero since we r not falling
           this.onGround = true;
           return;
         }
       }
     }
-
-    // no collision this frame
-    this.onGround = false;
   }
 
   fall() {
