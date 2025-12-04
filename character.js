@@ -21,7 +21,8 @@ export default class Character {
   collision(platform) {
     // Only check if falling
     for (const platform of platforms) {
-      if (this.velocity >= 0) { //when character is not moving upwards (can be falling or just stadanding)
+      if (this.velocity >= 0) {
+        //when character is not moving upwards (can be falling or just stadanding)
         // Character edges
         let feet = this.y + this.h;
         let nextFeet = feet + this.velocity;
@@ -52,8 +53,8 @@ export default class Character {
 
   fall() {
     if (!this.onGround) {
-      this.velocity += this.gravity;
-      this.y += this.velocity;
+      this.velocity += this.gravity; // //velocity = 0 - stagnant at first and then starts to fall and with each frame the fall is faster
+      this.y += this.velocity; //as the velocity increases, the positioning should increase so that the character moves downwards (more positive)
     }
   }
 
