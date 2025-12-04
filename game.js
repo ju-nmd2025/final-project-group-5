@@ -26,6 +26,7 @@ function drawFloor() {
 }
 
 function draw() {
+  screenMove();
   background(216, 189, 170);
   drawFloor();
 
@@ -36,7 +37,7 @@ function draw() {
     character.velocity = 0; //velocity of falling is reduced
     character.y = 350; //character.y position comes to a stop
   }
-  screenMove();
+
   character.jump();
   if (character.x + character.w < 0) {
     character.x = 440;
