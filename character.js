@@ -7,6 +7,7 @@ export default class Character {
     this.velocity = 0;
     this.gravity = 0.5;
     this.jumpForce = 2;
+    this.onTheGround = false;
   }
 
   draw() {
@@ -18,21 +19,42 @@ export default class Character {
   }
 
   collision(platform) {
-    if (
-      this.x >= platform.x - platform.w / 2 &&
-      this.x <= platform.x + platform.w / 2 &&
-      this.y >= platform.y - platform.h / 2 &&
-      this.y < platform.y + platform.h / 2
-    ) {
-      this.y = this.y; //dont fall
-      this.velocity = 0; //velocity is zero since we r not falling
-      this.jump(); // allows to jump again?
+    // Only check if falling
+    for (const platform of platforms) {
+      if (this.velocity >= 0) { //when character is not moving upwards (can be falling or just stadanding)
+        // Character edges
+        let feet = this.y + this.h;
+        let nextFeet = feet + this.velocity;
+
+        // Platform edges (TOP-LEFT ORIGIN!)
+        let pTop = platform.y;
+        let pLeft = platform.x;
+        let pRight = platform.x + platform.w;
+
+        // horizontal overlap
+        let withinX = this.x + this.w > pLeft && this.x < pRight;
+
+        // vertical collision with platform top
+        let hittingTop = feet <= pTop && nextFeet >= pTop;
+
+        if (withinX && hittingTop) {
+          this.y = pTop - this.h; // place on platform
+          this.velocity = 0;
+          this.onGround = true;
+          return;
+        }
+      }
     }
+
+    // no collision this frame
+    this.onGround = false;
   }
 
   fall() {
-    this.velocity = this.velocity + this.gravity;
-    this.y = this.y + this.velocity;
+    if (!this.onGround) {
+      this.velocity += this.gravity;
+      this.y += this.velocity;
+    }
   }
 
   jump() {
