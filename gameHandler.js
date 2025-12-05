@@ -34,7 +34,7 @@ function runGame() {
   if (character.x + character.w > 800) {
     character.x = 5;
   }
-  if (character.y <= -900) {
+  if (character.y <= -1000) {
     gameState = "end";
     character.y = floor;
   }
