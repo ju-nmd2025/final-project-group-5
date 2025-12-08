@@ -12,36 +12,27 @@ function setup() {
 
 let character = new Character(50, 50, 50, 50);
 let platforms = [
-  new Platform(70, 100, 80, 20),
-  new Platform(50, 500, 80, 20),
-  new Platform(350, 100, 80, 20),
-  new Platform(280, -50, 80, 20),
-  new Platform(60, -120, 80, 20),
-  new Platform(230, -200, 80, 20),
-  new Platform(370, -330, 80, 20),
-  new Platform(100, -370, 80, 20),
-  new Platform(260, -500, 80, 20),
-  new Platform(50, -600, 80, 20),
-  new Platform(300, -670, 80, 20),
-  new Platform(140, -750, 80, 20),
-  new Platform(360, -860, 80, 20),
-  new Platform(80, -980, 80, 20),
-  new Platform(260, -1100, 80, 20),
-  new Platform(50, -1220, 80, 20),
-  new Platform(300, -1340, 80, 20),
-  new Platform(140, -1460, 80, 20),
+  new Platform(150, 450, 80, 20), // near floor
+  new Platform(120, 200, 80, 20),
+  new Platform(300, 150, 80, 20),
+  new Platform(210, 0, 80, 20),
+  new Platform(310, -160, 80, 20),
+  new Platform(50, -240, 80, 20),
+  new Platform(100, -420, 80, 20),
+  new Platform(320, -500, 80, 20),
+  new Platform(240, -670, 80, 20),
+  new Platform(140, -760, 80, 20),
+  new Platform(90, -940, 80, 20),
 ];
- 
+
 let spikes = [
-  new Spike(160, 20, 80, 20),
-  new Spike(20, -260, 80, 20),
-  new Spike(320, -420, 80, 20),
-  new Spike(140, -550, 80, 20),
-  new Spike(360, -720, 80, 20),
-  new Spike(100, -900, 80, 20),
-  new Spike(330, -1040, 80, 20),
-  new Spike(160, -1180, 80, 20),
-  new Spike(350, -1420, 80, 20),
+  new Spike(60, 350, 80, 20),
+  new Spike(260, 300, 80, 20),
+  new Spike(40, 70, 80, 20),
+  new Spike(130, -80, 80, 20),
+  new Spike(260, -330, 80, 20),
+  new Spike(80, -580, 80, 20),
+  new Spike(300, -850, 80, 20),
 ];
 function drawFloor() {
   push();
@@ -54,13 +45,16 @@ function draw() {
   screenMove();
   background(216, 189, 170);
   drawFloor();
+
   for (const spike of spikes) {
     spike.draw();
   }
+
   for (const platform of platforms) {
     platform.draw();
     character.collision(platform);
   }
+
   character.draw();
 
   character.fall();
