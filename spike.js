@@ -1,25 +1,17 @@
 export default class Spike {
-  constructor(x1, y1, x2, y2, x3, y3) {
-    this.x1 = x1;
-    this.y1 = y1;
-    this.x2 = x2;
-    this.y2 = y2;
-    this.x3 = x3;
-    this.y3 = y3;
+  constructor(x, y, w, h) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
   }
 
-  draw() {
-    fill(120);
-    noStroke();
-    rect(60, 400, 150, 20);
-    translate(50, 50);
 
-    triangle(x1, y1, x2, y2, x3, y3);
-
-    translate(50, 0);
-    triangle(x1, y1, x2, y2, x3, y3);
-    translate(50, 0);
-
-    triangle(x1, y1, x2, y2, x3, y3);
+draw() {
+    push();
+    stroke(128,128,128);
+    fill(128,128,128);
+    rect(this.x, this.y, this.w, this.h);
+    pop();
   }
-}
+} 
