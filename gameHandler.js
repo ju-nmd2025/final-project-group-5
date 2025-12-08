@@ -14,6 +14,11 @@ function runGame() {
   screenMove();
   background(216, 189, 170);
   drawFloor();
+
+  for (const spike of spikes) {
+    spike.draw();
+  }
+
   for (const platform of platforms) {
     platform.draw();
     character.collision(platform);
