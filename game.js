@@ -1,5 +1,6 @@
 import { Character } from "./character";
 import { Platform } from "./platform";
+import { Spike } from "./spike";
 import { runGame } from "./gameHandler";
 import { end } from "./gameHandler";
 import { start } from "./gameHandler";
