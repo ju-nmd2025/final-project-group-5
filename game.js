@@ -64,6 +64,7 @@ function drawButton(x, y, w, h, r) {
 function mousePressed() {
   if (mouseX > 150 && mouseX < 350 && mouseY > 130 && mouseY < 230) {
     gameState = "runGame";
+    character.y = floor - character.h;
   }
 }
 
