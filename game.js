@@ -1,6 +1,7 @@
 import { Character } from "./character";
 import { Platform } from "./platform";
 import { screenMove } from "./gameHandler";
+import { Spike } from "./spike";
 
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
@@ -10,23 +11,46 @@ let canvasHeight = 490;
 let floor = 200;
 let character = new Character(50, 50, 50, 50);
 let platforms = [
-  new Platform(270, 100, 80, 20),
-  new Platform(175, 150, 80, 20),
-  new Platform(100, -200, 80, 20),
+  new Platform(70, 100, 80, 20),
   new Platform(50, 500, 80, 20),
-  new Platform(320, 50, 80, 20),
-  new Platform(200, 0, 80, 20),
-  new Platform(220, -670, 80, 20),
-  new Platform(220, -570, 80, 20),
-  new Platform(80, -6000, 80, 20),
-  new Platform(300, -210, 80, 20),
-  new Platform(260, -330, 80, 20),
-  new Platform(140, -50, 80, 20),
-  new Platform(310, -750, 80, 20),
-  new Platform(90, -500, 80, 20),
-  new Platform(80,-370,80,20),
+  new Platform(350, 100, 80, 20),
+  new Platform(280, -50, 80, 20),
+  new Platform(60, -120, 80, 20),
+  new Platform(230, -200, 80, 20),
+  new Platform(370, -330, 80, 20),
+  new Platform(100, -370, 80, 20),
+  new Platform(260, -500, 80, 20),
+  new Platform(50, -600, 80, 20),
+  new Platform(300, -670, 80, 20),
+  new Platform(140, -750, 80, 20),
+  new Platform(360, -860, 80, 20),
+  new Platform(80, -980, 80, 20),
+  new Platform(260, -1100, 80, 20),
+  new Platform(50, -1220, 80, 20),
+  new Platform(300, -1340, 80, 20),
+  new Platform(140, -1460, 80, 20),
+  //
+  new Spike(160, 20, 80, 20),
+  new Spike(20, -260, 80, 20),
+  new Spike(320, -420, 80, 20),
+  new Spike(140, -550, 80, 20),
+  new Spike(360, -720, 80, 20),
+  new Spike(100, -900, 80, 20),
+  new Spike(330, -1040, 80, 20),
+  new Spike(160, -1180, 80, 20),
+  new Spike(350, -1420, 80, 20),
 ];
-
+let spikes = [
+  new Spike(160, 20, 80, 20),
+  new Spike(20, -260, 80, 20),
+  new Spike(320, -420, 80, 20),
+  new Spike(140, -550, 80, 20),
+  new Spike(360, -720, 80, 20),
+  new Spike(100, -900, 80, 20),
+  new Spike(330, -1040, 80, 20),
+  new Spike(160, -1180, 80, 20),
+  new Spike(350, -1420, 80, 20),
+];
 function drawFloor() {
   push();
   strokeWeight(2);
@@ -41,6 +65,9 @@ function draw() {
   for (const platform of platforms) {
     platform.draw();
     character.collision(platform);
+  }
+  for (const spike of spikes) {
+    spike.draw();
   }
   character.draw();
 
