@@ -4,6 +4,7 @@ export default class Platform {
     this.y = y;
     this.w = w;
     this.h = h;
+    this.visited = false;
   }
 
   draw() {

@@ -13,15 +13,25 @@ function start() {
 function runGame() {
   screenMove();
   background(216, 189, 170);
+
+  ///landing counter
+  textAlign(LEFT);
+  textSize(20);
+  textSize(15);
+  fill(0);
+  text("LEVEL 1", 50, character.y - 170);
+  text("Safe Landings:" + " " + character.landing, 50, character.y - 150);
+
   drawFloor();
 
   for (const spike of spikes) {
     spike.draw();
-    character.badCollision(spike);
+    character.badCollision(spikes);
   }
+
   for (const platform of platforms) {
     platform.draw();
-    character.goodCollision(platform);
+    character.goodCollision(platforms);
   }
 
   character.draw();
