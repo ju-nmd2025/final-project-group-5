@@ -3,12 +3,13 @@ import { Platform } from "./platform";
 import { screenMove } from "./gameHandler";
 import { Spike } from "./spike";
 
+let canvasWidth = 500;
+let canvasHeight = 800;
+let floor = 500;
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
 }
-let canvasWidth = 500;
-let canvasHeight = 490;
-let floor = 200;
+
 let character = new Character(50, 50, 50, 50);
 let platforms = [
   new Platform(70, 100, 80, 20),
@@ -63,17 +64,17 @@ function draw() {
   character.draw();
 
   character.fall();
-  if (character.y + character.h >= 200) {
+  if (character.y + character.h >= floor) {
     //prevents the character from falling underground
     character.velocity = 0; //velocity of falling is reduced
-    character.y = 200 - character.h; //character.y position comes to a stop
+    character.y = floor - character.h; //character.y position comes to a stop
   }
 
   character.jump();
   if (character.x + character.w < 0) {
     character.x = 440;
   } //these if statements makes sure that u dont move the character off screen
-  if (character.x + character.w > 490) {
+  if (character.x + character.w > 800) {
     character.x = 5;
   }
 }
