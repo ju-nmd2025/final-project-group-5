@@ -29,17 +29,8 @@ let platforms = [
   new Platform(50, -1220, 80, 20),
   new Platform(300, -1340, 80, 20),
   new Platform(140, -1460, 80, 20),
-  //
-  new Spike(160, 20, 80, 20),
-  new Spike(20, -260, 80, 20),
-  new Spike(320, -420, 80, 20),
-  new Spike(140, -550, 80, 20),
-  new Spike(360, -720, 80, 20),
-  new Spike(100, -900, 80, 20),
-  new Spike(330, -1040, 80, 20),
-  new Spike(160, -1180, 80, 20),
-  new Spike(350, -1420, 80, 20),
 ];
+ 
 let spikes = [
   new Spike(160, 20, 80, 20),
   new Spike(20, -260, 80, 20),
@@ -62,12 +53,12 @@ function draw() {
   screenMove();
   background(216, 189, 170);
   drawFloor();
+  for (const spike of spikes) {
+    spike.draw();
+  }
   for (const platform of platforms) {
     platform.draw();
     character.collision(platform);
-  }
-  for (const spike of spikes) {
-    spike.draw();
   }
   character.draw();
 
