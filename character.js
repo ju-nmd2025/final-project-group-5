@@ -18,7 +18,7 @@ export default class Character {
     pop();
   }
 
-  collision(platform) {
+  goodCollision(platform) {
     for (const platform of platforms) {
       if (this.velocity >= 0) {
         //when character is not moving upwards (can be falling or just stadanding)
@@ -56,6 +56,25 @@ export default class Character {
     }
     if (keyIsDown(RIGHT_ARROW)) {
       this.x = this.x + 5;
+    }
+  }
+
+  badCollision(spike) {
+    for (const spike of spikes) {
+      if (this.velocity >= 0) {
+        //when character is not moving upwards (can be falling or just stadanding)
+
+        if (
+          //conditions to check if the character is within the range of being on the platform or atleast overlapping it
+          this.x + this.w > spike.x &&
+          this.x < spike.x + spike.w &&
+          this.y + this.h <= spike.y &&
+          this.y + this.h + this.velocity >= spike.y
+        ) {
+          gameState = "end";
+        }
+      }
+      this.onGround = false;
     }
   }
 }
