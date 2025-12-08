@@ -1,16 +1,20 @@
 import { Character } from "./character";
 import { Platform } from "./platform";
-import { screenMove } from "./gameHandler";
-import { Spike } from "./spike";
+import { runGame } from "./gameHandler";
+import { end } from "./gameHandler";
+import { start } from "./gameHandler";
+
+let gameState = "start";
 
 let canvasWidth = 500;
 let canvasHeight = 800;
 let floor = 500;
+
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
 }
 
-let character = new Character(50, 50, 50, 50);
+let character = new Character(25, 450, 50, 50);
 let platforms = [
   new Platform(150, 450, 80, 20), // near floor
   new Platform(120, 200, 80, 20),
@@ -37,38 +41,42 @@ let spikes = [
 function drawFloor() {
   push();
   strokeWeight(2);
+  stroke(0);
   line(0, floor, canvasWidth, floor);
   pop();
 }
 
+//start and restart button
+function drawButton(x, y, w, h, r) {
+  push();
+  //button shape
+  strokeWeight(10);
+  fill(194, 66, 56);
+  stroke(57, 51, 51);
+  rect(x, y, w, h, r);
+  //text
+  textSize(32);
+  fill("white");
+  strokeWeight(0);
+  text("START", 200, 190);
+}
+function mousePressed() {
+  if (mouseX > 150 && mouseX < 350 && mouseY > 130 && mouseY < 230) {
+    gameState = "runGame";
+  }
+}
+
 function draw() {
-  screenMove();
-  background(216, 189, 170);
-  drawFloor();
-
-  for (const spike of spikes) {
-    spike.draw();
+  if (gameState == "start") {
+    start();
   }
 
-  for (const platform of platforms) {
-    platform.draw();
-    character.collision(platform);
+  if (gameState == "runGame") {
+    runGame();
   }
 
-  character.draw();
-
-  character.fall();
-  if (character.y + character.h >= floor) {
-    //prevents the character from falling underground
-    character.velocity = 0; //velocity of falling is reduced
-    character.y = floor - character.h; //character.y position comes to a stop
-  }
-
-  character.jump();
-  if (character.x + character.w < 0) {
-    character.x = 440;
-  } //these if statements makes sure that u dont move the character off screen
-  if (character.x + character.w > 800) {
-    character.x = 5;
+  if (gameState == "end") {
+    end();
+    drawButton(150, 130, 200, 100, 20);
   }
 }
