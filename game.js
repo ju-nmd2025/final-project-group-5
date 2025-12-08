@@ -17,25 +17,27 @@ function setup() {
 let character = new Character(25, 450, 50, 50);
 let platforms = [
   new Platform(150, 450, 80, 20), // near floor
-  new Platform(60, 350, 80, 20),
-  new Platform(260, 300, 80, 20),
   new Platform(120, 200, 80, 20),
   new Platform(300, 150, 80, 20),
-  new Platform(40, 70, 80, 20),
   new Platform(210, 0, 80, 20),
-  new Platform(130, -80, 80, 20),
   new Platform(310, -160, 80, 20),
   new Platform(50, -240, 80, 20),
-  new Platform(260, -330, 80, 20),
   new Platform(100, -420, 80, 20),
   new Platform(320, -500, 80, 20),
-  new Platform(80, -580, 80, 20),
   new Platform(240, -670, 80, 20),
   new Platform(140, -760, 80, 20),
-  new Platform(300, -850, 80, 20),
   new Platform(90, -940, 80, 20),
 ];
 
+let spikes = [
+  new Spike(60, 350, 80, 20),
+  new Spike(260, 300, 80, 20),
+  new Spike(40, 70, 80, 20),
+  new Spike(130, -80, 80, 20),
+  new Spike(260, -330, 80, 20),
+  new Spike(80, -580, 80, 20),
+  new Spike(300, -850, 80, 20),
+];
 function drawFloor() {
   push();
   strokeWeight(2);
