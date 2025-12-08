@@ -65,6 +65,10 @@ function mousePressed() {
   if (mouseX > 150 && mouseX < 350 && mouseY > 130 && mouseY < 230) {
     gameState = "runGame";
     character.y = floor - character.h;
+    character.landing = 0;
+    for (const platform of platforms) {
+      platform.visited = false;
+    }
   }
 }
 
