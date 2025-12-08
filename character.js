@@ -1,3 +1,5 @@
+let froggie = loadImage("./character.png");
+
 export default class Character {
   constructor(x, y, w, h) {
     this.x = x;
@@ -14,7 +16,7 @@ export default class Character {
     push();
     fill(194, 66, 56);
     strokeWeight(0);
-    rect(this.x, this.y, this.w, this.h);
+    image(froggie, this.x, this.y, this.w, this.h);
     pop();
   }
 
