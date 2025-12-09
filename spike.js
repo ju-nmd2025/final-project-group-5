@@ -9,8 +9,8 @@ export default class Spike {
 
 draw() {
     push();
-    stroke(128,128,128);
-    fill(128,128,128);
+    stroke(178,0,50);
+    fill(178,0,50);
     rect(this.x, this.y, this.w, this.h);
     pop();
   }

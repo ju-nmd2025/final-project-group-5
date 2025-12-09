@@ -1,3 +1,4 @@
+let StartButton = loadImage("./jjnew.png");
 import { Character } from "./character";
 import { Platform } from "./platform";
 import { Spike } from "./spike";
@@ -51,15 +52,16 @@ function drawFloor() {
 function drawButton(x, y, w, h, r) {
   push();
   //button shape
-  strokeWeight(10);
-  fill(194, 66, 56);
-  stroke(57, 51, 51);
-  rect(x, y, w, h, r);
-  //text
-  textSize(32);
-  fill("white");
   strokeWeight(0);
-  text("START", 200, 190);
+  fill(178,0,50);
+  stroke(178,0,50);
+  image(StartButton,x, y, w, h, r);
+  //text
+  // textSize(32);
+  // fill("white");
+  // strokeWeight(0);
+  // textFont("Trebuchet MS");
+  // text("START", 200, 190);
 }
 function mousePressed() {
   if (mouseX > 150 && mouseX < 350 && mouseY > 130 && mouseY < 230) {
