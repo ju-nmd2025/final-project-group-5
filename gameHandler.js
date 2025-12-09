@@ -17,11 +17,12 @@ function runGame() {
 
   for (const spike of spikes) {
     spike.draw();
-    character.badCollision(spike);
+    character.badCollision(spikes);
   }
+
   for (const platform of platforms) {
     platform.draw();
-    character.goodCollision(platform);
+    character.goodCollision(platforms);
   }
 
   character.draw();

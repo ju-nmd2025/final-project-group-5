@@ -6,10 +6,11 @@ export default class Character {
     this.y = y;
     this.w = w;
     this.h = h;
+    this.landing = 0;
     this.velocity = 0;
     this.gravity = 0.5;
     this.jumpForce = 2;
-    this.onTheGround = false;
+    this.onGround = false;
   }
 
   draw() {
@@ -20,7 +21,7 @@ export default class Character {
     pop();
   }
 
-  goodCollision(platform) {
+  goodCollision(platforms) {
     for (const platform of platforms) {
       if (this.velocity >= 0) {
         //when character is not moving upwards (can be falling or just stadanding)
@@ -35,6 +36,10 @@ export default class Character {
           this.y = platform.y - this.h; // stop it from falling
           this.velocity = 0; //velocity is zero since we r not falling
           this.onGround = true;
+          if (!platform.visited) {
+            platform.visited = true;
+            this.landing += 1;
+          }
           return;
         }
       }
@@ -61,7 +66,7 @@ export default class Character {
     }
   }
 
-  badCollision(spike) {
+  badCollision(spikes) {
     for (const spike of spikes) {
       if (this.velocity >= 0) {
         //when character is not moving upwards (can be falling or just stadanding)
