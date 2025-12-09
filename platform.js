@@ -10,7 +10,7 @@ export default class Platform {
   draw() {
     push();
     stroke(123, 63, 0);
-    fill(123, 63, 0);
+    fill(85, 103, 48);
     rect(this.x, this.y, this.w, this.h);
     pop();
   }

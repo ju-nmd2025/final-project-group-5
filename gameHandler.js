@@ -6,22 +6,13 @@ function screenMove() {
 
 // //// game state = start
 function start() {
-  background(216, 189, 170);
+  background(233, 237, 230);
   drawButton(150, 130, 200, 100, 20);
 }
 //// game state = runGame
 function runGame() {
   screenMove();
-  background(216, 189, 170);
-
-  ///landing counter
-  textAlign(LEFT);
-  textSize(20);
-  textSize(15);
-  fill(0);
-  text("LEVEL 1", 50, character.y - 170);
-  text("Safe Landings:" + " " + character.landing, 50, character.y - 150);
-
+  background(233, 237, 230);
   drawFloor();
 
   for (const spike of spikes) {
@@ -58,14 +49,15 @@ function runGame() {
 
 //// game state = end
 function end() {
-  background(216, 189, 170);
+  background(233, 237, 230);
   push();
   textSize(32);
-  fill(0);
+  fill(248, 16, 46);
   stroke(0);
   strokeWeight(0);
   text("GAME OVER", 150, 400);
-  text("Safe Landings:" + " " + character.landing, 125, 450);
+  // text("Safe Landings:"+""+ character.landing,125,450);
+  textFont("Garamond");
   pop();
 }
 
