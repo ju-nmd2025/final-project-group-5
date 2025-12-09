@@ -13,6 +13,14 @@ function start() {
 function runGame() {
   screenMove();
   background(233, 237, 230);
+
+  //landing counter
+  textAlign(LEFT);
+  textSize(20);
+  textSize(15);
+  fill(0);
+  text("LEVEL 1", 50, character.y - 170);
+  text("Safe Landings: " + character.landing, 50, character.y - 150);
   drawFloor();
 
   for (const spike of spikes) {
@@ -56,7 +64,7 @@ function end() {
   stroke(0);
   strokeWeight(0);
   text("GAME OVER", 150, 400);
-  // text("Safe Landings:"+""+ character.landing,125,450);
+  text("Safe Landings:" + " " + character.landing, 125, 450);
   textFont("Garamond");
   pop();
 }
