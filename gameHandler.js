@@ -65,6 +65,7 @@ function end() {
   stroke(0);
   strokeWeight(0);
   text("GAME OVER", 150, 400);
+  text("Safe Landings:" + " " + character.landing, 125, 450);
   pop();
 }
 
