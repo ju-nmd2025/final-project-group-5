@@ -55,6 +55,7 @@ export default class Character {
     }
   }
 
+  // The following usage of keyIsDown is adapted from https://codeheir.com/blog/2021/03/13/how-to-code-doodle-jump/
   jump() {
     if (keyIsDown(UP_ARROW)) {
       this.velocity = this.velocity - this.jumpForce; //as the velocity decreases, the character moves up. more negative = higher up
