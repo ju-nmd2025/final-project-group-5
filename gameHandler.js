@@ -1,8 +1,10 @@
+// The following screenMove function was adapted from https://codeheir.com/blog/2021/03/13/how-to-code-doodle-jump/
 function screenMove() {
   if (character) {
     translate(0, canvasWidth / 2 - character.y);
   }
 }
+
 
 // //// game state = start
 function start() {
@@ -42,13 +44,16 @@ function runGame() {
     character.y = floor - character.h; //character.y position comes to a stop
   }
 
+
   character.jump();
+  // The following 6 lines was adapted from https://codeheir.com/blog/2021/03/13/how-to-code-doodle-jump/
   if (character.x + character.w < 0) {
     character.x = 440;
   } //these if statements makes sure that u dont move the character off screen
   if (character.x + character.w > 800) {
     character.x = 5;
   }
+
   if (character.y <= -1000) {
     gameState = "end";
     character.y = floor;

@@ -36,6 +36,7 @@ export default class Character {
           this.y = platform.y - this.h; // stop it from falling
           this.velocity = 0; //velocity is zero since we r not falling
           this.onGround = true;
+          // The following lines of code was adapted from chatgpt: https://chatgpt.com/s/t_69395c7418a881919558488635b5a646
           if (!platform.visited) {
             platform.visited = true;
             this.landing += 1;
