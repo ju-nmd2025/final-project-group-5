@@ -15,3 +15,5 @@ draw() {
     pop();
   }
 } 
+
+export { Spike };

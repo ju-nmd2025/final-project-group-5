@@ -5,6 +5,13 @@ function screenMove() {
   }
 }
 
+let StartButton;
+let froggie;
+
+function loadImages(){
+  StartButton = loadImage("./jjnew.png");
+  froggie = loadImage("./character.png");
+}
 
 // //// game state = start
 function start() {
@@ -74,4 +81,4 @@ function end() {
   pop();
 }
 
-export { runGame, screenMove, start, end };
+export { runGame, screenMove, start, end, loadImages, froggie, StartButton };
