@@ -16,4 +16,4 @@ export default class Platform {
   }
 }
 
-export { Platform };
+export { Platform }

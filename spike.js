@@ -16,4 +16,4 @@ draw() {
   }
 } 
 
-export { Spike };
+export { Spike }

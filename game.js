@@ -7,21 +7,20 @@ import {
     start,
     loadImages,
     froggie,
-    StartButton,
+    drawButton,
+    canvasWidth,
+    canvasHeight,
+    floor,
 } from "./gameHandler.js";
 
-let gameState = "start";
-
-let canvasWidth = 500;
-let canvasHeight = 800;
-let floor = 500;
+let character;
 
 function setup() {
     createCanvas(canvasWidth, canvasHeight);
     loadImages();
+    character = new Character(25, 450, 50, 50, froggie);
 }
 
-let character = new Character(25, 450, 50, 50);
 let platforms = [
     new Platform(150, 450, 80, 20), // near floor
     new Platform(120, 200, 80, 20),
@@ -45,26 +44,10 @@ let spikes = [
     new Spike(80, -580, 80, 20),
     new Spike(300, -850, 80, 20),
 ];
-function drawFloor() {
-    push();
-    strokeWeight(2);
-    stroke(0);
-    line(0, floor, canvasWidth, floor);
-    pop();
-}
 
-//start and restart button
-function drawButton(x, y, w, h, r) {
-    push();
-    //button shape
-    strokeWeight(0);
-    fill(178, 0, 50);
-    stroke(178, 0, 50);
-    image(StartButton, x, y, w, h);
-}
 function mousePressed() {
     if (mouseX > 150 && mouseX < 350 && mouseY > 130 && mouseY < 230) {
-        gameState = "runGame";
+        character.gameState = "runGame";
         character.y = floor - character.h;
         character.landing = 0;
         for (const platform of platforms) {
@@ -74,17 +57,16 @@ function mousePressed() {
 }
 
 function draw() {
-    if (gameState == "start") {
+    if (character.gameState == "start") {
         start();
     }
 
-    if (gameState == "runGame") {
-        runGame();
+    if (character.gameState == "runGame") {
+        runGame(character, spikes, platforms, floor);
     }
 
-    if (gameState == "end") {
-        end();
-        drawButton(150, 130, 200, 100, 20);
+    if (character.gameState == "end") {
+        end(character);
     }
 }
 
@@ -93,10 +75,10 @@ window.setup = setup;
 
 window.draw = draw;
 
-window.addEventListener("click", function (event) {
-    mousePressed();
+window.addEventListener("keydown", function (event) {
+    character.jump();
 });
 
-window.addEventListener("keydown", function (event) {
-    keyPressed();
+window.addEventListener("click", function (event) {
+    mousePressed();
 });
