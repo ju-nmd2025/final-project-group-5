@@ -1,23 +1,33 @@
-let froggie = loadImage("./character.png");
-
 export default class Character {
-  constructor(x, y, w, h) {
+
+  landing = 0;
+  velocity = 0;
+  gravity = 0.5;
+  jumpForce = 2;
+  onGround = false;
+  gameState = "start";
+
+  constructor(x, y, w, h, image) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
-    this.landing = 0;
-    this.velocity = 0;
-    this.gravity = 0.5;
-    this.jumpForce = 2;
-    this.onGround = false;
+    this.image = image;
+
+    // this.landing = 0;
+    // this.velocity = 0;
+    // this.gravity = 0.5;
+    // this.jumpForce = 2;
+    // this.onGround = false;
   }
 
   draw() {
     push();
     fill(194, 66, 56);
     strokeWeight(0);
-    image(froggie, this.x, this.y, this.w, this.h);
+    // this.image.width = this.w;
+    // this.image.height = this.h;
+    image(this.image, this.x, this.y, this.w, this.h);
     pop();
   }
 
@@ -80,10 +90,12 @@ export default class Character {
           this.y + this.h <= spike.y &&
           this.y + this.h + this.velocity >= spike.y
         ) {
-          gameState = "end";
+          this.gameState = "end";
         }
       }
       this.onGround = false;
     }
   }
 }
+
+export { Character };
