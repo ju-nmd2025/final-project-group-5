@@ -40,8 +40,8 @@ function drawButton(x, y, w, h) {
 
 // //// game state = start
 function start() {
-  background(233, 237, 230);
-  drawButton(150, 130, 200, 100, 20);
+    background(233, 237, 230);
+    drawButton(150, 130, 200, 100, 20);
 }
 //// game state = runGame
 function runGame(character, spikes, platforms, floor, spikeGap, gap) {
@@ -80,7 +80,10 @@ function runGame(character, spikes, platforms, floor, spikeGap, gap) {
     );
   }
 
-  character.draw();
+    for (const platform of platforms) {
+        platform.draw();
+        character.goodCollision(platforms);
+    }
 
   character.fall();
 
