@@ -1,24 +1,28 @@
 let froggie = loadImage("./character.png");
 
 export default class Character {
-  constructor(x, y, w, h) {
+  landing = 0;
+  velocity = 0;
+  intialVelocity = -10; // the inclusion of intial velocity was adpated from https://www.youtube.com/watch?v=pHFtOYU-a20&t=581s
+  gravity = 0.5;
+  gravity = 0.5;
+  jumpForce = 12;
+  onGround = false;
+  gameState = "start";
+
+  constructor(x, y, w, h, image) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
-    this.landing = 0;
-    this.velocity = 0;
-    this.intialVelocity = -10; // the inclusion of intial velocity was adpated from https://www.youtube.com/watch?v=pHFtOYU-a20&t=581s
-    this.gravity = 0.5;
-    this.jumpForce = 12;
-    this.onGround = false;
+    this.image = image;
   }
 
   draw() {
     push();
     fill(194, 66, 56);
     strokeWeight(0);
-    image(froggie, this.x, this.y, this.w, this.h);
+    image(this.image, this.x, this.y, this.w, this.h);
     pop();
   }
 
@@ -94,3 +98,5 @@ export default class Character {
     }
   }
 }
+
+export { Character };
