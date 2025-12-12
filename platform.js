@@ -1,5 +1,5 @@
-export default class Platform {
-  constructor(x, y, w, h) {
+export class Platform {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
     this.w = 80;
@@ -16,4 +16,4 @@ export default class Platform {
   }
 }
 
-export { Platform };
+// export { Platform };

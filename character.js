@@ -1,12 +1,10 @@
-let froggie = loadImage("./character.png");
-
-export default class Character {
+export class Character {
   landing = 0;
   velocity = 0;
   intialVelocity = -10; // the inclusion of intial velocity was adpated from https://www.youtube.com/watch?v=pHFtOYU-a20&t=581s
   gravity = 0.5;
   gravity = 0.5;
-  jumpForce = 12;
+  jumpForce = 8;
   onGround = false;
   gameState = "start";
 
@@ -38,7 +36,7 @@ export default class Character {
           this.y + this.h <= platform.y &&
           this.y + this.h + this.velocity >= platform.y
         ) {
-          this.velocity = -12;
+          this.velocity = -9;
           this.jumpForce = this.intialVelocity;
           this.onGround = true;
 
@@ -91,12 +89,11 @@ export default class Character {
           this.y + this.h <= spike.y &&
           this.y + this.h + this.velocity >= spike.y
         ) {
-          gameState = "end";
+          this.gameState = "end";
         }
       }
-      this.onGround = false;
     }
   }
 }
 
-export { Character };
+// export { Character };

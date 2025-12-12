@@ -1,15 +1,12 @@
-import { Character } from "./character";
-import { Platform } from "./platform";
-import { Spike } from "./spike";
-// import { runGame } from "./gameHandler";
-// import { end } from "./gameHandler";
-// import { start } from "./gameHandler";
+import { Character } from "./character.js";
+import { Platform } from "./platform.js";
+import { Spike } from "./spike.js";
 import {
   runGame,
   end,
   start,
   loadImages,
-  froggie,
+  frog,
   drawButton,
   canvasWidth,
   canvasHeight,
@@ -26,7 +23,7 @@ let spikeGap;
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
   loadImages();
-  let character = new Character(25, 750, 50, 50);
+  character = new Character(25, 750, 50, 50, frog);
 
   // The following 12 lines was adapted from https://codeheir.com/blog/2021/03/13/how-to-code-doodle-jump/
 
@@ -62,11 +59,12 @@ function draw() {
   }
 
   if (character.gameState == "runGame") {
-    runGame(character, spikes, platforms, floor);
+    runGame(character, spikes, platforms, floor, spikeGap, gap);
   }
 
-  if (gameState == "end") {
+  if (character.gameState == "end") {
     end(character);
+    drawButton(150, 130, 200, 100, 20);
   }
 }
 
@@ -76,7 +74,7 @@ window.setup = setup;
 window.draw = draw;
 
 window.addEventListener("keydown", function (event) {
-  character.jump();
+  character.move();
 });
 
 window.addEventListener("click", function (event) {

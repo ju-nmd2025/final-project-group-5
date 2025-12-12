@@ -1,5 +1,5 @@
-export default class Spike {
-  constructor(x, y, w, h) {
+export class Spike {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
     this.w = 80;
@@ -24,4 +24,4 @@ export default class Spike {
   }
 }
 
-export { Spike };
+// export { Spike };

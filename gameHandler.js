@@ -1,3 +1,6 @@
+import { Spike } from "./spike.js";
+import { Platform } from "./platform.js";
+
 let canvasWidth = 500;
 let canvasHeight = 800;
 let floor = 800;
@@ -26,13 +29,13 @@ function loadImages() {
 }
 
 //start and restart button
-function drawButton(x, y, w, h, r) {
+function drawButton(x, y, w, h) {
   push();
   //button shape
   strokeWeight(0);
   fill(178, 0, 50);
   stroke(178, 0, 50);
-  image(StartButton, x, y, w, h, r);
+  image(StartButton, x, y, w, h);
 }
 
 // //// game state = start
@@ -41,8 +44,8 @@ function start() {
   drawButton(150, 130, 200, 100, 20);
 }
 //// game state = runGame
-function runGame(character, spikes, platforms, floor) {
-  screenMove();
+function runGame(character, spikes, platforms, floor, spikeGap, gap) {
+  screenMove(character);
   background(233, 237, 230);
 
   //landing counter
@@ -98,7 +101,7 @@ function runGame(character, spikes, platforms, floor) {
   }
 
   if (character.velocity > 30) {
-    gameState = "end";
+    character.gameState = "end";
     character.y = floor;
   }
 }
@@ -126,6 +129,7 @@ export {
   loadImages,
   StartButton,
   frog,
+  drawButton,
   canvasWidth,
   canvasHeight,
   floor,
