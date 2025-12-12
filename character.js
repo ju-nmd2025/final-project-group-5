@@ -1,7 +1,7 @@
 export class Character {
   landing = 0;
   velocity = 0;
-  intialVelocity = -10; // the inclusion of intial velocity was adpated from https://www.youtube.com/watch?v=pHFtOYU-a20&t=581s
+  intialVelocity = -8; // the inclusion of intial velocity was adpated from https://www.youtube.com/watch?v=pHFtOYU-a20&t=581s
   gravity = 0.5;
   gravity = 0.5;
   jumpForce = 8;
@@ -24,12 +24,10 @@ export class Character {
     pop();
   }
 
-    constructor(x, y, w, h, image) {
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
-        this.image = image;
+  goodCollision(platforms) {
+    for (const platform of platforms) {
+      if (this.velocity >= 0) {
+        //when character is not moving upwards (can be falling or just stadanding)
 
         if (
           //conditions to check if the character is within the range of being on the platform or atleast overlapping it
@@ -52,16 +50,14 @@ export class Character {
       }
       this.onGround = false;
     }
+  }
 
-    draw() {
-        push();
-        fill(194, 66, 56);
-        strokeWeight(0);
-        // this.image.width = this.w;
-        // this.image.height = this.h;
-        image(this.image, this.x, this.y, this.w, this.h);
-        pop();
+  fall() {
+    if (!this.onGround) {
+      this.velocity += this.gravity; // //velocity = 0 - stagnant at first and then starts to fall and with each frame the fall is faster
+      this.y += this.velocity; //as the velocity increases, the positioning should increase so that the character moves downwards (more positive)
     }
+  }
 
   // The following usage of keyIsDown is adapted from https://codeheir.com/blog/2021/03/13/how-to-code-doodle-jump/
   move() {
@@ -72,19 +68,10 @@ export class Character {
     if (keyIsDown(LEFT_ARROW)) {
       this.x = this.x - 5;
     }
-
-    // The following usage of keyIsDown is adapted from https://codeheir.com/blog/2021/03/13/how-to-code-doodle-jump/
-    jump() {
-        if (keyIsDown(UP_ARROW)) {
-            this.velocity = this.velocity - this.jumpForce; //as the velocity decreases, the character moves up. more negative = higher up
-        }
-        if (keyIsDown(LEFT_ARROW)) {
-            this.x = this.x - 5;
-        }
-        if (keyIsDown(RIGHT_ARROW)) {
-            this.x = this.x + 5;
-        }
+    if (keyIsDown(RIGHT_ARROW)) {
+      this.x = this.x + 5;
     }
+  }
 
   jump() {
     this.velocity -= this.jumpForce;
@@ -106,6 +93,7 @@ export class Character {
         }
       }
     }
+  }
 }
 
 // export { Character };
