@@ -1,9 +1,9 @@
-export default class Platform {
-  constructor(x, y, w, h) {
+export class Platform {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.w = w;
-    this.h = h;
+    this.w = 80;
+    this.h = 20;
     this.visited = false;
   }
 
@@ -16,4 +16,4 @@ export default class Platform {
   }
 }
 
-export { Platform }
+// export { Platform };

@@ -6,7 +6,7 @@ import {
   end,
   start,
   loadImages,
-  froggie,
+  frog,
   drawButton,
   canvasWidth,
   canvasHeight,
@@ -15,35 +15,32 @@ import {
 
 let character;
 
+let gap;
+let platforms = [];
+let spikes = [];
+let spikeGap;
+
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
   loadImages();
-  character = new Character(25, 450, 50, 50, froggie);
+  character = new Character(25, 750, 50, 50, frog);
+
+  // The following 12 lines was adapted from https://codeheir.com/blog/2021/03/13/how-to-code-doodle-jump/
+
+  let platformCount = 5;
+  gap = height / platformCount;
+  for (let i = 1; i < 10; i++) {
+    let newPlatform = new Platform(random(canvasWidth), height * 1.5 - i * gap);
+    platforms.push(newPlatform);
+  }
+
+  let spikeCount = 4;
+  spikeGap = height / spikeCount;
+  for (let i = 1; i < 10; i++) {
+    let newSpike = new Spike(random(canvasWidth), height * 1.5 - i * spikeGap);
+    spikes.push(newSpike);
+  }
 }
-
-let platforms = [
-  new Platform(150, 450, 80, 20), // near floor
-  new Platform(120, 200, 80, 20),
-  new Platform(300, 150, 80, 20),
-  new Platform(210, 0, 80, 20),
-  new Platform(310, -160, 80, 20),
-  new Platform(50, -240, 80, 20),
-  new Platform(100, -420, 80, 20),
-  new Platform(320, -500, 80, 20),
-  new Platform(240, -670, 80, 20),
-  new Platform(140, -760, 80, 20),
-  new Platform(90, -940, 80, 20),
-];
-
-let spikes = [
-  new Spike(60, 350, 80, 20),
-  new Spike(260, 300, 80, 20),
-  new Spike(40, 70, 80, 20),
-  new Spike(130, -80, 80, 20),
-  new Spike(260, -330, 80, 20),
-  new Spike(80, -580, 80, 20),
-  new Spike(300, -850, 80, 20),
-];
 
 function mousePressed() {
   if (mouseX > 150 && mouseX < 350 && mouseY > 130 && mouseY < 230) {
@@ -62,7 +59,7 @@ function draw() {
   }
 
   if (character.gameState == "runGame") {
-    runGame(character, spikes, platforms, floor);
+    runGame(character, spikes, platforms, floor, spikeGap, gap);
   }
 
   if (character.gameState == "end") {
@@ -77,7 +74,7 @@ window.setup = setup;
 window.draw = draw;
 
 window.addEventListener("keydown", function (event) {
-  character.jump();
+  character.move();
 });
 
 window.addEventListener("click", function (event) {
