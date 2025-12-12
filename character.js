@@ -8,8 +8,9 @@ export default class Character {
     this.h = h;
     this.landing = 0;
     this.velocity = 0;
+    this.intialVelocity = -10;
     this.gravity = 0.5;
-    this.jumpForce = 2;
+    this.jumpForce = 12;
     this.onGround = false;
   }
 
@@ -33,9 +34,10 @@ export default class Character {
           this.y + this.h <= platform.y &&
           this.y + this.h + this.velocity >= platform.y
         ) {
-          this.y = platform.y - this.h; // stop it from falling
-          this.velocity = 0; //velocity is zero since we r not falling
+          this.velocity = -12;
+          this.jumpForce = this.intialVelocity;
           this.onGround = true;
+
           // The following lines of code was adapted from chatgpt: https://chatgpt.com/s/t_69395c7418a881919558488635b5a646
           if (!platform.visited) {
             platform.visited = true;
@@ -56,16 +58,20 @@ export default class Character {
   }
 
   // The following usage of keyIsDown is adapted from https://codeheir.com/blog/2021/03/13/how-to-code-doodle-jump/
-  jump() {
-    if (keyIsDown(UP_ARROW)) {
-      this.velocity = this.velocity - this.jumpForce; //as the velocity decreases, the character moves up. more negative = higher up
-    }
+  move() {
+    this.jumpForce += this.gravity;
+    this.y += this.jumpForce;
+
     if (keyIsDown(LEFT_ARROW)) {
       this.x = this.x - 5;
     }
     if (keyIsDown(RIGHT_ARROW)) {
       this.x = this.x + 5;
     }
+  }
+
+  jump() {
+    this.velocity -= this.jumpForce;
   }
 
   badCollision(spikes) {

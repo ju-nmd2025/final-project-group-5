@@ -1,10 +1,9 @@
 // The following screenMove function was adapted from https://codeheir.com/blog/2021/03/13/how-to-code-doodle-jump/
 function screenMove() {
   if (character) {
-    translate(0, canvasWidth / 2 - character.y);
+    translate(0, canvasHeight / 2 - character.y);
   }
 }
-
 
 // //// game state = start
 function start() {
@@ -12,40 +11,54 @@ function start() {
   drawButton(150, 130, 200, 100, 20);
 }
 //// game state = runGame
-function runGame() {
+function runGame(platforms) {
   screenMove();
   background(233, 237, 230);
 
   //landing counter
   textAlign(LEFT);
-  textSize(20);
   textSize(15);
   fill(0);
-  text("LEVEL 1", 50, character.y - 170);
   text("Safe Landings: " + character.landing, 50, character.y - 150);
   drawFloor();
+
+  character.jumpForce = character.intialVelocity;
 
   for (const spike of spikes) {
     spike.draw();
     character.badCollision(spikes);
   }
 
+  let lastSpike = spikes[0];
+  if (lastSpike.y > floor) {
+    spikes.push(
+      new Spike(random(width), spikes[spikes.length - 1].y - spikeGap)
+    );
+  }
+
   for (const platform of platforms) {
     platform.draw();
     character.goodCollision(platforms);
+  }
+  let lastPlatform = platforms[0];
+  if (lastPlatform.y > floor) {
+    platforms.push(
+      new Platform(random(width), platforms[platforms.length - 1].y - gap)
+    );
   }
 
   character.draw();
 
   character.fall();
+
   if (character.y + character.h >= floor) {
     //prevents the character from falling underground
     character.velocity = 0; //velocity of falling is reduced
     character.y = floor - character.h; //character.y position comes to a stop
   }
 
+  character.move();
 
-  character.jump();
   // The following 6 lines was adapted from https://codeheir.com/blog/2021/03/13/how-to-code-doodle-jump/
   if (character.x + character.w < 0) {
     character.x = 440;
@@ -54,7 +67,7 @@ function runGame() {
     character.x = 5;
   }
 
-  if (character.y <= -1000) {
+  if (character.velocity > 30) {
     gameState = "end";
     character.y = floor;
   }
