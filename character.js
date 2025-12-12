@@ -8,7 +8,7 @@ export default class Character {
     this.h = h;
     this.landing = 0;
     this.velocity = 0;
-    this.intialVelocity = -10;
+    this.intialVelocity = -10; // the inclusion of intial velocity was adpated from https://www.youtube.com/watch?v=pHFtOYU-a20&t=581s
     this.gravity = 0.5;
     this.jumpForce = 12;
     this.onGround = false;
@@ -59,6 +59,7 @@ export default class Character {
 
   // The following usage of keyIsDown is adapted from https://codeheir.com/blog/2021/03/13/how-to-code-doodle-jump/
   move() {
+    // the following two lines of code are adapted from https://www.youtube.com/watch?v=pHFtOYU-a20&t=581s
     this.jumpForce += this.gravity;
     this.y += this.jumpForce;
 

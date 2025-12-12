@@ -19,6 +19,8 @@ let spikeGap;
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
 
+  // The following 12 lines was adapted from https://codeheir.com/blog/2021/03/13/how-to-code-doodle-jump/
+
   let platformCount = 5;
   gap = height / platformCount;
   for (let i = 1; i < 10; i++) {
