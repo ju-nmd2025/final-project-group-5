@@ -28,7 +28,7 @@ function setup() {
 
   // The following 12 lines was adapted from https://codeheir.com/blog/2021/03/13/how-to-code-doodle-jump/
 
-  let platformCount = 5;
+  let platformCount = 6;
   gap = height / platformCount;
   maxX = canvasWidth - 80;
   for (let i = 1; i < 10; i++) {
@@ -53,7 +53,7 @@ function setup() {
 }
 function resetPlatform() {
   platforms.length = 0;
-  let platformCount = 5;
+  let platformCount = 6;
   let gap = height / platformCount;
   for (let i = 1; i < 10; i++) {
     let breakable = random() < 0.2;
