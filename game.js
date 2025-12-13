@@ -35,9 +35,19 @@ function setup() {
   }
 
   let spikeCount = 4;
-  spikeGap = height / spikeCount;
+  spikeGap = floor / spikeCount;
   for (let i = 1; i < 10; i++) {
-    let newSpike = new Spike(random(canvasWidth), floor - i * spikeGap); //remove game over error 
+    let newSpike = new Spike(random(canvasWidth), floor - i * spikeGap); //remove game over error
+    spikes.push(newSpike);
+  }
+}
+
+function resetSpikes() {
+  let spikes = [];
+  let spikeCount = 4;
+  let spikeGap = floor / spikeCount;
+  for (let i = 1; i < 10; i++) {
+    let newSpike = new Spike(random(canvasWidth), floor - i * spikeGap);
     spikes.push(newSpike);
   }
 }
@@ -50,6 +60,7 @@ function mousePressed() {
     for (const platform of platforms) {
       platform.visited = false;
     }
+    resetSpikes();
   }
 }
 

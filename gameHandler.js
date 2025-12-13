@@ -64,7 +64,8 @@ function runGame(character, spikes, platforms, floor, spikeGap, gap) {
 
   let highestSpike = spikes[spikes.length - 1];
   if (character.y < highestSpike.y + 600) {
-    spikes.push(new Spike(random(width), highestSpike.y - spikeGap)); //fix spike regeneration  
+    spikes.push(new Spike(random(width), highestSpike.y - spikeGap)); //fix spike regeneration 
+    spikes.shift
   }
 
   for (const platform of platforms) {
