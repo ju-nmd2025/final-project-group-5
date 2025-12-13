@@ -40,8 +40,8 @@ function drawButton(x, y, w, h) {
 
 // //// game state = start
 function start() {
-    background(233, 237, 230);
-    drawButton(150, 130, 200, 100, 20);
+  background(233, 237, 230);
+  drawButton(150, 130, 200, 100, 20);
 }
 //// game state = runGame
 function runGame(character, spikes, platforms, floor, spikeGap, gap) {
@@ -64,8 +64,8 @@ function runGame(character, spikes, platforms, floor, spikeGap, gap) {
 
   let highestSpike = spikes[spikes.length - 1];
   if (character.y < highestSpike.y + 600) {
-    spikes.push(new Spike(random(width), highestSpike.y - spikeGap)); //fix spike regeneration 
-    spikes.shift
+    spikes.push(new Spike(random(width), highestSpike.y - spikeGap)); //fix spike regeneration
+    spikes.shift;
   }
 
   for (const platform of platforms) {
@@ -83,10 +83,12 @@ function runGame(character, spikes, platforms, floor, spikeGap, gap) {
     );
   }
 
-    for (const platform of platforms) {
-        platform.draw();
-        character.goodCollision(platforms);
-    }
+  for (const platform of platforms) {
+    platform.draw();
+    character.goodCollision(platforms);
+  }
+
+  character.draw();
 
   character.fall();
 
