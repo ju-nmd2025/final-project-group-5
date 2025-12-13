@@ -1,7 +1,7 @@
 export class Character {
   landing = 0;
   velocity = 0;
-  intialVelocity = -9; // the inclusion of intial velocity was adpated from https://www.youtube.com/watch?v=pHFtOYU-a20&t=581s
+  intialVelocity = -9; // the inclusion of intial velocity was adapted from https://www.youtube.com/watch?v=pHFtOYU-a20&t=581s
   gravity = 0.5;
   gravity = 0.5;
   jumpForce = 5;
@@ -44,6 +44,14 @@ export class Character {
           if (!platform.visited) {
             platform.visited = true;
             this.landing += 1;
+          }
+          if (platform.breakable) {
+            platform.breakable = true;
+            platform.r = 233;
+            platform.g = 237; //background colour code 233, 237, 230
+            platform.b = 230;
+            console.log("break!");
+            return;
           }
           return;
         }

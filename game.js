@@ -19,6 +19,7 @@ let gap;
 let platforms = [];
 let spikes = [];
 let spikeGap;
+let maxX;
 
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
@@ -27,14 +28,23 @@ function setup() {
 
   // The following 12 lines was adapted from https://codeheir.com/blog/2021/03/13/how-to-code-doodle-jump/
 
-  let platformCount = 5;
+  let platformCount = 6;
   gap = height / platformCount;
+  maxX = canvasWidth - 80;
   for (let i = 1; i < 10; i++) {
-    let newPlatform = new Platform(random(canvasWidth), height * 1.5 - i * gap);
+    let breakable = random() < 0.1;
+    let newPlatform = new Platform(
+      random(maxX),
+      height * 1.5 - i * gap,
+      breakable
+    );
     platforms.push(newPlatform);
+
+    // the following 3 line of code was adapted from https://www.youtube.com/watch?v=pHFtOYU-a20&t=581s
+
     if (character.jumpForce < 0 && character.y < (3 / 4) * canvasHeight) {
       platform.y = platform.y - character.intialVelocity; //slide platforms down as character moves up
-    }
+    } 
   }
 
   let spikeCount = 4;
@@ -42,6 +52,26 @@ function setup() {
   for (let i = 1; i < 10; i++) {
     let newSpike = new Spike(random(canvasWidth), floor - i * spikeGap); //remove game over error
     spikes.push(newSpike);
+  }
+}
+function resetPlatform() {
+  platforms.length = 0;
+  let platformCount = 6;
+  let gap = height / platformCount;
+  for (let i = 1; i < 10; i++) {
+    let breakable = random() < 0.2;
+    let newPlatform = new Platform(
+      random(maxX),
+      height * 1.5 - i * gap,
+      85,
+      103,
+      48,
+      breakable
+    );
+    platforms.push(newPlatform);
+    if (character.jumpForce < 0 && character.y < (3 / 4) * canvasHeight) {
+      platform.y = platform.y - character.intialVelocity; //slide platforms down as character moves up
+    }
   }
 }
 
@@ -63,6 +93,8 @@ function mousePressed() {
     for (const platform of platforms) {
       platform.visited = false;
     }
+
+    resetPlatform();
     resetSpikes();
   }
 }
@@ -73,7 +105,7 @@ function draw() {
   }
 
   if (character.gameState == "runGame") {
-    runGame(character, spikes, platforms, floor, spikeGap, gap);
+    runGame(character, spikes, platforms, floor, spikeGap, gap, maxX);
   }
 
   if (character.gameState == "end") {
