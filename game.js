@@ -30,7 +30,12 @@ function setup() {
   let platformCount = 5;
   gap = height / platformCount;
   for (let i = 1; i < 10; i++) {
-    let newPlatform = new Platform(random(canvasWidth), height * 1.5 - i * gap);
+    let breakable = random() < 0.1;
+    let newPlatform = new Platform(
+      random(canvasWidth),
+      height * 1.5 - i * gap,
+      breakable
+    );
     platforms.push(newPlatform);
     if (character.jumpForce < 0 && character.y < (3 / 4) * canvasHeight) {
       platform.y = platform.y - character.intialVelocity; //slide platforms down as character moves up
@@ -42,6 +47,26 @@ function setup() {
   for (let i = 1; i < 10; i++) {
     let newSpike = new Spike(random(canvasWidth), floor - i * spikeGap); //remove game over error
     spikes.push(newSpike);
+  }
+}
+function resetPlatform() {
+  platforms.length = 0;
+  let platformCount = 5;
+  let gap = height / platformCount;
+  for (let i = 1; i < 10; i++) {
+    let breakable = random() < 0.2;
+    let newPlatform = new Platform(
+      random(canvasWidth),
+      height * 1.5 - i * gap,
+      85,
+      103,
+      48,
+      breakable
+    );
+    platforms.push(newPlatform);
+    if (character.jumpForce < 0 && character.y < (3 / 4) * canvasHeight) {
+      platform.y = platform.y - character.intialVelocity; //slide platforms down as character moves up
+    }
   }
 }
 
@@ -63,6 +88,8 @@ function mousePressed() {
     for (const platform of platforms) {
       platform.visited = false;
     }
+
+    resetPlatform();
     resetSpikes();
   }
 }

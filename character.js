@@ -45,6 +45,14 @@ export class Character {
             platform.visited = true;
             this.landing += 1;
           }
+          if (platform.breakable) {
+            platform.breakable = true;
+            platform.r = 233;
+            platform.g = 237; //background colour code 233, 237, 230
+            platform.b = 230;
+            console.log("break!");
+            return;
+          }
           return;
         }
       }
