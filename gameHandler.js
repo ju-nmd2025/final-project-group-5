@@ -44,7 +44,7 @@ function start() {
   drawButton(150, 130, 200, 100, 20);
 }
 //// game state = runGame
-function runGame(character, spikes, platforms, floor, spikeGap, gap) {
+function runGame(character, spikes, platforms, floor, spikeGap, gap, maxX) {
   screenMove(character);
   background(233, 237, 230);
 
@@ -77,7 +77,7 @@ function runGame(character, spikes, platforms, floor, spikeGap, gap) {
     let breakable = random() < 0.2;
     platforms.push(
       new Platform(
-        random(width),
+        random(0, maxX),
         platforms[platforms.length - 1].y - gap,
         85,
         103,

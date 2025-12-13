@@ -19,6 +19,7 @@ let gap;
 let platforms = [];
 let spikes = [];
 let spikeGap;
+let maxX;
 
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
@@ -29,10 +30,11 @@ function setup() {
 
   let platformCount = 5;
   gap = height / platformCount;
+  maxX = canvasWidth - 80;
   for (let i = 1; i < 10; i++) {
     let breakable = random() < 0.1;
     let newPlatform = new Platform(
-      random(canvasWidth),
+      random(maxX),
       height * 1.5 - i * gap,
       breakable
     );
@@ -56,7 +58,7 @@ function resetPlatform() {
   for (let i = 1; i < 10; i++) {
     let breakable = random() < 0.2;
     let newPlatform = new Platform(
-      random(canvasWidth),
+      random(maxX),
       height * 1.5 - i * gap,
       85,
       103,
@@ -100,7 +102,7 @@ function draw() {
   }
 
   if (character.gameState == "runGame") {
-    runGame(character, spikes, platforms, floor, spikeGap, gap);
+    runGame(character, spikes, platforms, floor, spikeGap, gap, maxX);
   }
 
   if (character.gameState == "end") {
