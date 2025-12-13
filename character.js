@@ -1,10 +1,10 @@
 export class Character {
   landing = 0;
   velocity = 0;
-  intialVelocity = -10; // the inclusion of intial velocity was adpated from https://www.youtube.com/watch?v=pHFtOYU-a20&t=581s
+  intialVelocity = -9; // the inclusion of intial velocity was adpated from https://www.youtube.com/watch?v=pHFtOYU-a20&t=581s
   gravity = 0.5;
   gravity = 0.5;
-  jumpForce = 8;
+  jumpForce = 5;
   onGround = false;
   gameState = "start";
 
