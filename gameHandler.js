@@ -62,11 +62,9 @@ function runGame(character, spikes, platforms, floor, spikeGap, gap) {
     character.badCollision(spikes);
   }
 
-  let lastSpike = spikes[0];
-  if (lastSpike.y > floor) {
-    spikes.push(
-      new Spike(random(width), spikes[spikes.length - 1].y - spikeGap)
-    );
+  let highestSpike = spikes[spikes.length - 1];
+  if (character.y < highestSpike.y + 600) {
+    spikes.push(new Spike(random(width), highestSpike.y - spikeGap)); //fix spike regeneration  
   }
 
   for (const platform of platforms) {
@@ -76,7 +74,11 @@ function runGame(character, spikes, platforms, floor, spikeGap, gap) {
   let lastPlatform = platforms[0];
   if (lastPlatform.y > floor) {
     platforms.push(
-      new Platform(random(width), platforms[platforms.length - 1].y - gap, false)
+      new Platform(
+        random(width),
+        platforms[platforms.length - 1].y - gap,
+        false
+      )
     );
   }
 

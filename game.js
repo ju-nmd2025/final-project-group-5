@@ -37,7 +37,7 @@ function setup() {
   let spikeCount = 4;
   spikeGap = height / spikeCount;
   for (let i = 1; i < 10; i++) {
-    let newSpike = new Spike(random(canvasWidth), height * 1.5 - i * spikeGap);
+    let newSpike = new Spike(random(canvasWidth), floor - i * spikeGap); //remove game over error 
     spikes.push(newSpike);
   }
 }
