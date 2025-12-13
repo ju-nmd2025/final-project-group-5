@@ -32,6 +32,9 @@ function setup() {
   for (let i = 1; i < 10; i++) {
     let newPlatform = new Platform(random(canvasWidth), height * 1.5 - i * gap);
     platforms.push(newPlatform);
+    if (character.jumpForce < 0 && character.y < (3 / 4) * canvasHeight) {
+      platform.y = platform.y - character.intialVelocity; //slide platforms down as character moves up
+    }
   }
 
   let spikeCount = 4;
