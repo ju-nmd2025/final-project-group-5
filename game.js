@@ -39,9 +39,12 @@ function setup() {
       breakable
     );
     platforms.push(newPlatform);
+
+    // the following 3 line of code was adapted from https://www.youtube.com/watch?v=pHFtOYU-a20&t=581s
+
     if (character.jumpForce < 0 && character.y < (3 / 4) * canvasHeight) {
       platform.y = platform.y - character.intialVelocity; //slide platforms down as character moves up
-    }
+    } 
   }
 
   let spikeCount = 4;
