@@ -74,7 +74,7 @@ function runGame(character, spikes, platforms, floor, spikeGap, gap, maxX) {
   }
   let lastPlatform = platforms[0];
   if (lastPlatform.y > floor) {
-    let breakable = random() < 0.2;
+    let breakable = random() < 0.1;
     platforms.push(
       new Platform(
         random(0, maxX),
